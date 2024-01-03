@@ -4,7 +4,7 @@ import Banner from "../../components/Banner";
 
 const Home = () => {
   const [allProducts, setAllProducts] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(allProducts);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const [cart, setCart] = useState([]);
@@ -28,10 +28,10 @@ const Home = () => {
   }, [allProducts, filter]);
 
   return (
-    <div className="max-w-7xl mx-auto px-5 w-">
-      <Banner cart={cart} setSearch={setSearch} />
+    <div className="">
+      <Banner setCart={setCart} cart={cart} setSearch={setSearch} />
 
-      <div className="">
+      <div className="max-w-7xl mx-auto px-5">
         <div className="w-[200px]">
           <select
             defaultValue="all"

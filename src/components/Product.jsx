@@ -2,6 +2,7 @@ import { PropTypes } from "prop-types";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
+import toast from "react-hot-toast";
 
 const Product = ({ product, setCart, cart }) => {
   const discountPrice = (product?.price * product?.discountPercentage) / 100;
@@ -10,10 +11,11 @@ const Product = ({ product, setCart, cart }) => {
   const handleCart = (product) => {
     const addedToCart = [...cart, product];
     setCart(addedToCart);
+    toast.success("Added");
   };
 
   return (
-    <div className="hover:shadow-3xl transition-all duration-300 ease-in-out  p-4">
+    <div className="hover:shadow-3xl transition-all duration-300 ease-in-out  p-4 bg-white">
       <img
         src={product?.thumbnail}
         className="w-full h-[250px] object-cover"

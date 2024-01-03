@@ -1,8 +1,8 @@
 import { IoSearch } from "react-icons/io5";
-import Navbar from "./Navbar";
 import { PropTypes } from "prop-types";
+import Navbar from "./Navbar";
 
-const Banner = ({ setSearch, cart }) => {
+const Banner = ({ setSearch, setCart, cart }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearch(e.target.name.value);
@@ -10,8 +10,8 @@ const Banner = ({ setSearch, cart }) => {
 
   return (
     <div>
-      <Navbar cart={cart} />
-      <div className="h-[40vh] md:min-h-[60vh] bg-[#3f1a44] rounded-b-md mb-10 md:mb-14">
+      <Navbar setCart={setCart} cart={cart} />
+      <div className="h-[40vh] md:min-h-[60vh] bg-gradient-to-r from-[#3f1a44] [#64226d] to-[#9f26af]  mb-10 md:mb-14">
         <div className="pt-14 md:pt-24">
           <h2 className="md:text-4xl text-2xl text-slate-300 text-center font-semibold">
             Find Your Product
@@ -39,6 +39,7 @@ const Banner = ({ setSearch, cart }) => {
 
 Banner.propTypes = {
   setSearch: PropTypes.func,
+  setCart: PropTypes.func,
   cart: PropTypes.array,
 };
 

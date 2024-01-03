@@ -1,17 +1,16 @@
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { getFromLS } from "../utils/getItemsFromLS";
 
 const Navbar = ({ cart }) => {
   const navigate = useNavigate();
+  const user = getFromLS("user");
 
   const totalPrice = cart?.reduce((total, product) => {
     const discountPrice = (product?.price * product?.discountPercentage) / 100;
     const price = product?.price - discountPrice;
-
     return total + price;
   }, 0);
-
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
     localStorage.clear("user");
@@ -46,9 +45,11 @@ const Navbar = ({ cart }) => {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item">
-                  {cart?.length}
-                </span>
+                {cart?.length && (
+                  <span className="badge badge-sm indicator-item">
+                    {cart?.length}
+                  </span>
+                )}
               </div>
             </div>
             <div
@@ -59,14 +60,10 @@ const Navbar = ({ cart }) => {
                 <span className="font-bold text-lg">
                   {cart?.length} Products
                 </span>
+
                 <span className="text-info">
-                  Subtotal: ${totalPrice.toFixed(2)}
+                  Subtotal: ${totalPrice ? totalPrice.toFixed(2) : 0}
                 </span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -76,7 +73,7 @@ const Navbar = ({ cart }) => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full">
+              <div className="w-10 rounded-full border-2 border-slate-600">
                 <img alt="Tailwind CSS Navbar component" src={user?.image} />
               </div>
             </div>
@@ -100,6 +97,7 @@ const Navbar = ({ cart }) => {
 
 Navbar.propTypes = {
   cart: PropTypes.array,
+  setCart: PropTypes.func,
 };
 
 export default Navbar;
