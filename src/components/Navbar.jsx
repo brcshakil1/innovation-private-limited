@@ -21,7 +21,7 @@ const Navbar = ({ cart }) => {
     <div className="max-w-7xl mx-auto px-5">
       <div className="navbar ">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">E-CoM</a>
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
