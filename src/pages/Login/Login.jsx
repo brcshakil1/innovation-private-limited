@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import bgImgDesktop from "../../assets/background-pattern-desktop.svg";
 import bgImgMobile from "../../assets/background-pattern-mobile.svg";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const Login = () => {
             token: data?.token,
           };
           localStorage.setItem("user", JSON.stringify(userInfo));
+          toast.success("Successfully logged in!");
           return navigate("/");
         }
       });
