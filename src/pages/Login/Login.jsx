@@ -15,6 +15,7 @@ const Login = () => {
       username,
       password,
     };
+
     // login from dummyJson
     fetch("https://dummyjson.com/auth/login", {
       method: "POST",
@@ -24,7 +25,13 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.username) {
-          localStorage.setItem("token", data?.token);
+          const userInfo = {
+            username: data?.username,
+            name: `${data?.firstName} ${data?.lastName}`,
+            image: data?.image,
+            token: data?.token,
+          };
+          localStorage.setItem("user", JSON.stringify(userInfo));
           return navigate("/");
         }
       });

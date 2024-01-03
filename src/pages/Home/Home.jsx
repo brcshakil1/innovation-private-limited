@@ -7,6 +7,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/search?q=${search}`)
@@ -26,14 +27,12 @@ const Home = () => {
     setProducts(filteredProducts);
   }, [allProducts, filter]);
 
-  console.log(search);
-
   return (
-    <div className="max-w-7xl mx-auto px">
-      <Banner setSearch={setSearch} />
+    <div className="max-w-7xl mx-auto px-5 w-">
+      <Banner cart={cart} setSearch={setSearch} />
 
-      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <div className="col-span-1">
+      <div className="">
+        <div className="w-[200px]">
           <select
             defaultValue="all"
             value={filter}
@@ -45,10 +44,15 @@ const Home = () => {
             <option value="heighToLow">Heigh to low</option>
           </select>
         </div>
-        <div className="col-span-1 lg:col-span-4 md:col-span-3">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="py-7">
+          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {products?.map((product) => (
-              <Product key={product?.id} product={product} />
+              <Product
+                key={product?.id}
+                product={product}
+                setCart={setCart}
+                cart={cart}
+              />
             ))}
           </div>
         </div>

@@ -3,9 +3,14 @@ import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
 
-const Product = ({ product }) => {
+const Product = ({ product, setCart, cart }) => {
   const discountPrice = (product?.price * product?.discountPercentage) / 100;
   const price = product?.price - discountPrice;
+
+  const handleCart = (product) => {
+    const addedToCart = [...cart, product];
+    setCart(addedToCart);
+  };
 
   return (
     <div className="hover:shadow-3xl transition-all duration-300 ease-in-out  p-4">
@@ -25,6 +30,7 @@ const Product = ({ product }) => {
         </p>
         <Rating style={{ maxWidth: 80 }} value={product?.rating} readOnly />
         <button
+          onClick={() => handleCart(product)}
           className="hover:bg-[#3f1a44c7] bg-[#3f1a44] mt-2 w-full 
         font-semibold text-base text-white rounded-md uppercase py-2"
         >
@@ -37,6 +43,8 @@ const Product = ({ product }) => {
 
 Product.propTypes = {
   product: PropTypes.object,
+  setCart: PropTypes.func,
+  cart: PropTypes.array,
 };
 
 export default Product;
